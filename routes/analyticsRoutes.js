@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const { getDashboardStats, getMonthlyStats, getTeamPerformance, getLeadSources, getPipelineData } = require('../controllers/analyticsController');
+const { protect, adminOnly } = require('../middleware/authMiddleware');
+router.use(protect);
+router.get('/dashboard', getDashboardStats);
+router.get('/monthly', getMonthlyStats);
+router.get('/team-performance', adminOnly, getTeamPerformance);
+router.get('/lead-sources', getLeadSources);
+router.get('/pipeline', getPipelineData);
+module.exports = router;
